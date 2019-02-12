@@ -46,5 +46,18 @@ namespace PillarPencilKata
             StringAssert.AreEqualIgnoringCase(letterToGrandma += letterContinued, PadOfPaper.WrittenContent);
 
         }
+
+        [Test]
+        public void PencilIsGivenADurabilityValueUponCreation()
+        {
+            //Arrange
+            var hunkOfGraphite = 50;
+
+            //Act
+            var shinyNewMechanicalPencil = new Pencil(hunkOfGraphite);
+
+            //Assert
+            Assert.AreEqual(hunkOfGraphite, shinyNewMechanicalPencil.Durability);
+        }
     }
 }
