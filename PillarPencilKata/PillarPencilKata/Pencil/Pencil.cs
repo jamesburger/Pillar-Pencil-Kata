@@ -38,7 +38,14 @@ namespace PillarPencilKata.Pencil_Logic
                 {
                     continue;
                 }
-                --Durability;
+                else if (char.IsUpper(letter))
+                {
+                    Durability = Durability - 2;
+                }
+                else if (char.IsLower(letter))
+                {
+                    --Durability;
+                }
             }
             return input;
         }

@@ -10,11 +10,7 @@ namespace PillarPencilKata
 
         private Pencil NumberTwoPencil;
 
-        [OneTimeSetUp]
-        public void TestSetup()
-        {
-            NumberTwoPencil = new Pencil();
-        }
+        private PaperModel Paper;
 
         [Test]
         public void PaperContainsTextPencilWrites()
@@ -22,6 +18,7 @@ namespace PillarPencilKata
             //Arrange
             var letterToSanta = "Dear Santa, I hope you're well";
             var constructionPaper = new PaperModel();
+            NumberTwoPencil = new Pencil();
 
             //Act
             constructionPaper = NumberTwoPencil.WriteInputOntoPaper(letterToSanta, constructionPaper);
@@ -37,6 +34,7 @@ namespace PillarPencilKata
             var letterToGrandma = "Thanks so much for the five dollars you sent for my birthday. ";
             var letterContinued = "Dad reassures me you understand what inflation is. I'm not convinced.";
             var collegeRule = new PaperModel();
+            NumberTwoPencil = new Pencil();
 
             //Act
             NumberTwoPencil.WriteInputOntoPaper(letterToGrandma, collegeRule);
@@ -90,6 +88,23 @@ namespace PillarPencilKata
 
             //Assert
             Assert.AreEqual(inkLeft, highlighter.Durability);
+        }
+
+        [Test]
+        public void CapitalLettersReduceDurabilityByTwo()
+        {
+            //Arrange
+            NumberTwoPencil = new Pencil(20);
+            var barbaricYawp = "MY YAWPS TOP";
+            Paper = new PaperModel();
+            var bigWhoppingZero = 0;
+
+            //Act
+            Paper = NumberTwoPencil.WriteInputOntoPaper(barbaricYawp, Paper);
+
+            //Assert
+            Assert.AreEqual(bigWhoppingZero, NumberTwoPencil.Durability);
+
         }
     }
 }
