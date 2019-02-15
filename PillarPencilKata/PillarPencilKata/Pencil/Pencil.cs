@@ -6,8 +6,6 @@ namespace PillarPencilKata.Pencil_Logic
     {
         public int Durability { get; set; }
 
-        private PaperModel Paper = new PaperModel();
-
         public Pencil()
         {
 
@@ -18,17 +16,27 @@ namespace PillarPencilKata.Pencil_Logic
             Durability = durability;
         }
          
-        public PaperModel WriteInputOntoPaper(string input)
+        public PaperModel WriteInputOntoPaper(string input, PaperModel Paper)
         {
             if(Paper.WrittenContent == null)
             {
-                Paper.WrittenContent = input;
+                Paper.WrittenContent = ReducePencilDurability(input);
             }
             else
             {
-                Paper.WrittenContent += input;
+                Paper.WrittenContent += ReducePencilDurability(input);
             }
             return Paper;
+        }
+
+        private string ReducePencilDurability(string input)
+        {
+            var letterArray = input.ToCharArray();
+            foreach(var letter in letterArray)
+            {
+                --Durability;
+            }
+            return input;
         }
     }
 }

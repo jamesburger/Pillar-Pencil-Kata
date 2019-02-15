@@ -9,13 +9,11 @@ namespace PillarPencilKata
     {
 
         private Pencil NumberTwoPencil;
-        private PaperModel PadOfPaper;
 
-       [OneTimeSetUp]
-       public void TestSetup()
+        [OneTimeSetUp]
+        public void TestSetup()
         {
             NumberTwoPencil = new Pencil();
-            PadOfPaper = new PaperModel(); 
         }
 
         [Test]
@@ -23,12 +21,13 @@ namespace PillarPencilKata
         {
             //Arrange
             var letterToSanta = "Dear Santa, I hope you're well";
+            var constructionPaper = new PaperModel();
 
             //Act
-            PadOfPaper = NumberTwoPencil.WriteInputOntoPaper(letterToSanta);
+            constructionPaper = NumberTwoPencil.WriteInputOntoPaper(letterToSanta, constructionPaper);
 
             //Assert
-            StringAssert.AreEqualIgnoringCase(letterToSanta, PadOfPaper.WrittenContent);
+            StringAssert.AreEqualIgnoringCase(letterToSanta, constructionPaper.WrittenContent);
         }
 
         [Test]
@@ -37,13 +36,14 @@ namespace PillarPencilKata
             //Arrange
             var letterToGrandma = "Thanks so much for the five dollars you sent for my birthday. ";
             var letterContinued = "Dad reassures me you understand what inflation is. I'm not convinced.";
+            var collegeRule = new PaperModel();
 
             //Act
-            NumberTwoPencil.WriteInputOntoPaper(letterToGrandma);
-            PadOfPaper = NumberTwoPencil.WriteInputOntoPaper(letterContinued);
+            NumberTwoPencil.WriteInputOntoPaper(letterToGrandma, collegeRule);
+            collegeRule = NumberTwoPencil.WriteInputOntoPaper(letterContinued, collegeRule);
 
             //Assert
-            StringAssert.AreEqualIgnoringCase(letterToGrandma += letterContinued, PadOfPaper.WrittenContent);
+            StringAssert.AreEqualIgnoringCase(letterToGrandma += letterContinued, collegeRule.WrittenContent);
 
         }
 
@@ -59,5 +59,22 @@ namespace PillarPencilKata
             //Assert
             Assert.AreEqual(hunkOfGraphite, shinyNewMechanicalPencil.Durability);
         }
+
+        [Test]
+        public void PencilDurabilityFunctionReducesDurabilityByOnePerLetter()
+        {
+            //Arrange
+            var backOfEnvelope = new PaperModel();
+            var groceryList = "eggs and milk";
+            var inkLeft = 7;
+            var bicPen = new Pencil(20);
+
+            //Act
+            backOfEnvelope = bicPen.WriteInputOntoPaper(groceryList, backOfEnvelope);
+
+            //Assert
+            Assert.AreEqual(inkLeft, bicPen.Durability);
+        }
+
     }
 }
