@@ -34,6 +34,10 @@ namespace PillarPencilKata.Pencil_Logic
             var letterArray = input.ToCharArray();
             foreach(var letter in letterArray)
             {
+                if (char.IsWhiteSpace(letter))
+                {
+                    continue;
+                }
                 --Durability;
             }
             return input;

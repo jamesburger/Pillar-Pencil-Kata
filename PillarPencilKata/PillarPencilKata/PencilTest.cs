@@ -76,5 +76,20 @@ namespace PillarPencilKata
             Assert.AreEqual(inkLeft, bicPen.Durability);
         }
 
+        [Test]
+        public void WhiteSpacesInGivenInputDoNotReduceDurability()
+        {
+            //Arrange
+            var receipt = new PaperModel();
+            var highlighter = new Pencil(20);
+            var taxDeductiblePurchase = "office supplies";
+            var inkLeft = 6;
+
+            //Act
+            receipt = highlighter.WriteInputOntoPaper(taxDeductiblePurchase, receipt);
+
+            //Assert
+            Assert.AreEqual(inkLeft, highlighter.Durability);
+        }
     }
 }
