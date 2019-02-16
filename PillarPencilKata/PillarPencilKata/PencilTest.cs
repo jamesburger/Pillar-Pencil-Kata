@@ -150,7 +150,22 @@ namespace PillarPencilKata
             Paper = NumberTwoPencil.WriteInputOntoPaper(twoLetters, Paper);
 
             //Assert
-            Assert.AreEqual(Paper.WrittenContent, "j ");
+            Assert.AreEqual("j ", Paper.WrittenContent);
+        }
+
+        [Test]
+        public void CamelCaseInputStillReplacedByWhiteSpaceOncePencilDull()
+        {
+            //Arrange
+            NumberTwoPencil = new Pencil(3);
+            Paper = new PaperModel();
+            var myInitials = "Jjb";
+
+            //Act
+            Paper = NumberTwoPencil.WriteInputOntoPaper(myInitials, Paper);
+
+            //Assert
+            Assert.AreEqual("Jj ", Paper.WrittenContent);
         }
     }
 }
