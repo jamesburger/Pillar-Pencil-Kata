@@ -54,6 +54,10 @@ namespace PillarPencilKata.Pencil_Logic
                     }
                     newSentence += letter;
                 }
+                else
+                {
+                    newSentence += " ";
+                }
             }
             return newSentence;
         }

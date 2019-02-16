@@ -112,8 +112,8 @@ namespace PillarPencilKata
             //Arrange
             NumberTwoPencil = new Pencil(5);
             Paper = new PaperModel();
-            var mumble = "what if this works instead";
-            var whatWasHeard = "what i";
+            var mumble = "what if";
+            var whatWasHeard = "what i ";
 
             //Act
             Paper = NumberTwoPencil.WriteInputOntoPaper(mumble, Paper);
@@ -136,6 +136,21 @@ namespace PillarPencilKata
             //Assert
             Assert.AreNotEqual(capitalLetter, Paper.WrittenContent);
             Assert.AreEqual(Paper.WrittenContent, "j");
+        }
+
+        [Test]
+        public void OncePencilIsDullRemainingCharactersWrittenAsWhiteSpaces()
+        {
+            //Arrange
+            NumberTwoPencil = new Pencil(1);
+            Paper = new PaperModel();
+            var twoLetters = "jb";
+
+            //Act
+            Paper = NumberTwoPencil.WriteInputOntoPaper(twoLetters, Paper);
+
+            //Assert
+            Assert.AreEqual(Paper.WrittenContent, "j ");
         }
     }
 }
