@@ -1,4 +1,5 @@
 ﻿using PillarPencilKata.Models;
+using System.Collections.Generic;
 
 namespace PillarPencilKata.Pencil_Logic
 {
@@ -32,22 +33,27 @@ namespace PillarPencilKata.Pencil_Logic
         private string ReducePencilDurability(string input)
         {
             var letterArray = input.ToCharArray();
+            var newSentence = "";
             foreach(var letter in letterArray)
             {
-                if (char.IsWhiteSpace(letter))
+                if(Durability > 0)
                 {
-                    continue;
-                }
-                else if (char.IsUpper(letter))
-                {
-                    Durability = Durability - 2;
-                }
-                else if (char.IsLower(letter))
-                {
-                    --Durability;
+                     if (char.IsUpper(letter))
+                    {
+                        if(Durability < 2)
+                        {
+                            continue;
+                        }
+                        Durability = Durability - 2;
+                    }
+                    else if (char.IsLower(letter))
+                    {
+                        --Durability;
+                    }
+                    newSentence += letter;
                 }
             }
-            return input;
+            return newSentence;
         }
     }
 }

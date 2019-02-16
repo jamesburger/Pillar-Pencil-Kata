@@ -18,7 +18,7 @@ namespace PillarPencilKata
             //Arrange
             var letterToSanta = "Dear Santa, I hope you're well";
             var constructionPaper = new PaperModel();
-            NumberTwoPencil = new Pencil();
+            NumberTwoPencil = new Pencil(30);
 
             //Act
             constructionPaper = NumberTwoPencil.WriteInputOntoPaper(letterToSanta, constructionPaper);
@@ -34,7 +34,7 @@ namespace PillarPencilKata
             var letterToGrandma = "Thanks so much for the five dollars you sent for my birthday. ";
             var letterContinued = "Dad reassures me you understand what inflation is. I'm not convinced.";
             var collegeRule = new PaperModel();
-            NumberTwoPencil = new Pencil();
+            NumberTwoPencil = new Pencil(200);
 
             //Act
             NumberTwoPencil.WriteInputOntoPaper(letterToGrandma, collegeRule);
@@ -64,7 +64,7 @@ namespace PillarPencilKata
             //Arrange
             var backOfEnvelope = new PaperModel();
             var groceryList = "eggs and milk";
-            var inkLeft = 7;
+            var inkLeft = 9;
             var bicPen = new Pencil(20);
 
             //Act
@@ -104,7 +104,37 @@ namespace PillarPencilKata
 
             //Assert
             Assert.AreEqual(bigWhoppingZero, NumberTwoPencil.Durability);
+        }
 
+        [Test]
+        public void PencilStopsWritingIfDurabilityEqualOrLessThanZero()
+        {
+            //Arrange
+            NumberTwoPencil = new Pencil(5);
+            Paper = new PaperModel();
+            var mumble = "what if this works instead";
+            var whatWasHeard = "what i";
+
+            //Act
+            Paper = NumberTwoPencil.WriteInputOntoPaper(mumble, Paper);
+
+            //Assert
+            StringAssert.AreEqualIgnoringCase(whatWasHeard, Paper.WrittenContent);
+        }
+
+        [Test]
+        public void IfDurabilityLowerThanTwoPencilDoesNotWriteCapitalLetter()
+        {
+            //Arrange
+            NumberTwoPencil = new Pencil(1);
+            Paper = new PaperModel();
+            var capitalLetter = "J";
+
+            //Act
+            Paper = NumberTwoPencil.WriteInputOntoPaper(capitalLetter, Paper);
+
+            //Assert
+            Assert.That(string.IsNullOrEmpty(Paper.WrittenContent), "A message was written"); 
         }
     }
 }
