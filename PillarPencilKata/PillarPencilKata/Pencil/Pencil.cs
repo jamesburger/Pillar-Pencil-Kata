@@ -7,6 +7,8 @@ namespace PillarPencilKata.Pencil_Logic
     {
         public int Durability { get; set; }
 
+        private string NewSentence;
+
         public Pencil()
         {
 
@@ -27,39 +29,63 @@ namespace PillarPencilKata.Pencil_Logic
             {
                 Paper.WrittenContent += ReducePencilDurability(input);
             }
+
+            NewSentence = string.Empty;
+
             return Paper;
         }
 
         private string ReducePencilDurability(string input)
         {
             var letterArray = input.ToCharArray();
-            var newSentence = "";
             foreach(var letter in letterArray)
             {
                 if(Durability > 0)
                 {
-                     if (char.IsUpper(letter))
-                    {
-                        if(Durability == 1)
-                        {
-                             newSentence += char.ToLower(letter);
-                            --Durability;
-                            continue;
-                        }
-                        Durability = Durability - 2;
-                    }
-                    else if (char.IsLower(letter))
-                    {
-                        --Durability;
-                    }
-                    newSentence += letter;
+                    ParseLettersByCapitalizationOrWhitespace(letter);
                 }
                 else
                 {
-                    newSentence += " ";
+                    NewSentence += " ";
                 }
             }
-            return newSentence;
+            return NewSentence;
+        }
+
+        private void ParseLettersByCapitalizationOrWhitespace(char letter)
+        {
+            if (char.IsUpper(letter))
+            {
+                UpperCaseLetterHandler(letter);
+            }
+            else if (char.IsLower(letter))
+            {
+                LowerCaseHandler(letter);
+            }
+            else
+            {
+                NewSentence += letter;
+            }
+        }
+
+        private void UpperCaseLetterHandler(char letter)
+        {
+            if (Durability == 1)
+            {
+                --Durability;
+                NewSentence += char.ToLower(letter);
+            }
+            else
+            {
+                Durability = Durability - 2;
+                NewSentence += letter;
+            }
+        }
+
+        private void LowerCaseHandler(char letter)
+        {
+            --Durability;
+            NewSentence += letter;
         }
     }
 }
