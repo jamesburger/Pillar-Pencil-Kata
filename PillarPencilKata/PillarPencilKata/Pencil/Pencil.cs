@@ -40,8 +40,10 @@ namespace PillarPencilKata.Pencil_Logic
                 {
                      if (char.IsUpper(letter))
                     {
-                        if(Durability < 2)
+                        if(Durability == 1)
                         {
+                             newSentence += char.ToLower(letter);
+                            --Durability;
                             continue;
                         }
                         Durability = Durability - 2;

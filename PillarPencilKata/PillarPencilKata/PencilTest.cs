@@ -134,7 +134,8 @@ namespace PillarPencilKata
             Paper = NumberTwoPencil.WriteInputOntoPaper(capitalLetter, Paper);
 
             //Assert
-            Assert.That(string.IsNullOrEmpty(Paper.WrittenContent), "A message was written"); 
+            Assert.AreNotEqual(capitalLetter, Paper.WrittenContent);
+            Assert.AreEqual(Paper.WrittenContent, "j");
         }
     }
 }
