@@ -30,12 +30,12 @@ namespace PillarPencilKata.Pencil_Logic
             return Paper;
         }
 
-        public PaperModel Eraser(string input, PaperModel paper)
+        public PaperModel Eraser(string wordToBeDeleted, PaperModel paper)
         {
-           var lastInstanceOfInput = paper.WrittenContent.LastIndexOf(input);
-            if(lastInstanceOfInput >= 0)
+           var lastInstanceOfWordBeingDeleted = paper.WrittenContent.LastIndexOf(wordToBeDeleted);
+            if(lastInstanceOfWordBeingDeleted >= 0)
             {
-                paper.WrittenContent = paper.WrittenContent.Remove(lastInstanceOfInput, input.Length).Insert(lastInstanceOfInput, new string(' ', input.Length));
+                paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
             }
             else
             {
@@ -95,6 +95,11 @@ namespace PillarPencilKata.Pencil_Logic
         {
             --Durability;
             NewSentence += letter;
+        }
+
+        public string RemoveSpecifiedWordAndReplaceWithWhiteSpace(string originalSentence, string wordBeingRemoved, int indexPostion)
+        {
+            return originalSentence.Remove(indexPostion, wordBeingRemoved.Length).Insert(indexPostion, new string(' ', wordBeingRemoved.Length));
         }
     }
 }
