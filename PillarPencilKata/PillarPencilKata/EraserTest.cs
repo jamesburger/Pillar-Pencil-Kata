@@ -15,7 +15,7 @@ namespace PillarPencilKata
         public void RemoveLastInstanceOfGivenWord()
         {
             //Arrange
-            PeacockQuil = new Pencil();
+            PeacockQuil = new Pencil(1);
             Parchment = new PaperModel()
             {
                 WrittenContent = "I like coffee wakes me up makes me fast I love coffee"
@@ -34,7 +34,7 @@ namespace PillarPencilKata
         public void ReplaceErasedWordWithWhiteSpace()
         {
             //Arrange
-            PeacockQuil = new Pencil();
+            PeacockQuil = new Pencil(1);
             Parchment = new PaperModel() {
                 WrittenContent = "Troll in the dungeon, thought you ought to know"
             };
@@ -56,7 +56,7 @@ namespace PillarPencilKata
         public void ReplaceWordsInTheMiddleOfTheSentence()
         {
             //Arrange
-            PeacockQuil = new Pencil();
+            PeacockQuil = new Pencil(1);
             Parchment = new PaperModel()
             {
                 WrittenContent = "Better be Gryffidor"
@@ -69,6 +69,28 @@ namespace PillarPencilKata
 
             //Assert
             Assert.AreEqual(instancesOfWordAfterRemoval, Regex.Matches(Parchment.WrittenContent, wordToRemove).Count);
+
+        }
+
+        [Test]
+        public void ErasingTheSameWordTwiceErasesTheLastTwoInstancesOfTheWord()
+        {
+            //Arrange
+            PeacockQuil = new Pencil(1);
+            Parchment = new PaperModel()
+            {
+                WrittenContent = "wizarding world of wizards world"
+            };
+            var wordToBeRemoved = "world";
+            var instacesOfWordAfterTwoRemovals = 0;
+
+            //Act
+            PeacockQuil.Eraser(wordToBeRemoved, Parchment);
+            PeacockQuil.Eraser(wordToBeRemoved, Parchment);
+
+            //Assert
+            Assert.AreEqual(instacesOfWordAfterTwoRemovals, Regex.Matches(Parchment.WrittenContent, wordToBeRemoved).Count);
+
 
         }
     }

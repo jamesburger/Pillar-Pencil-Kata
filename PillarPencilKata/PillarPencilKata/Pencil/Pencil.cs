@@ -9,11 +9,6 @@ namespace PillarPencilKata.Pencil_Logic
 
         private string NewSentence;
 
-        public Pencil()
-        {
-
-        }
-
         public Pencil(int durability)
         {
             Durability = durability;
