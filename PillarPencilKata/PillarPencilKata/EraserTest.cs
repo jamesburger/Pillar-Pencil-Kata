@@ -51,5 +51,25 @@ namespace PillarPencilKata
             Assert.AreNotEqual(instancesOfNewWhiteSpace, Regex.Matches(Parchment.WrittenContent, wordToRemove).Count);
 
         }
+
+        [Test]
+        public void ReplaceWordsInTheMiddleOfTheSentence()
+        {
+            //Arrange
+            PeacockQuil = new Pencil();
+            Parchment = new PaperModel()
+            {
+                WrittenContent = "Better be Gryffidor"
+            };
+            var wordToRemove = "be";
+            var instancesOfWordAfterRemoval = 0;
+
+            //Act
+            PeacockQuil.Eraser(wordToRemove, Parchment);
+
+            //Assert
+            Assert.AreEqual(instancesOfWordAfterRemoval, Regex.Matches(Parchment.WrittenContent, wordToRemove).Count);
+
+        }
     }
 }
