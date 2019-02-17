@@ -21,7 +21,7 @@ namespace PillarPencilKata
             NumberTwoPencil = new Pencil(30);
 
             //Act
-            constructionPaper = NumberTwoPencil.WriteInputOntoPaper(letterToSanta, constructionPaper);
+            NumberTwoPencil.WriteInputOntoPaper(letterToSanta, constructionPaper);
 
             //Assert
             StringAssert.AreEqualIgnoringCase(letterToSanta, constructionPaper.WrittenContent);
@@ -38,7 +38,7 @@ namespace PillarPencilKata
 
             //Act
             NumberTwoPencil.WriteInputOntoPaper(letterToGrandma, collegeRule);
-            collegeRule = NumberTwoPencil.WriteInputOntoPaper(letterContinued, collegeRule);
+            NumberTwoPencil.WriteInputOntoPaper(letterContinued, collegeRule);
 
             //Assert
             StringAssert.AreEqualIgnoringCase(letterToGrandma += letterContinued, collegeRule.WrittenContent);
@@ -68,7 +68,7 @@ namespace PillarPencilKata
             var bicPen = new Pencil(20);
 
             //Act
-            backOfEnvelope = bicPen.WriteInputOntoPaper(groceryList, backOfEnvelope);
+            bicPen.WriteInputOntoPaper(groceryList, backOfEnvelope);
 
             //Assert
             Assert.AreEqual(inkLeft, bicPen.Durability);
@@ -84,7 +84,7 @@ namespace PillarPencilKata
             var inkLeft = 6;
 
             //Act
-            receipt = highlighter.WriteInputOntoPaper(taxDeductiblePurchase, receipt);
+            highlighter.WriteInputOntoPaper(taxDeductiblePurchase, receipt);
 
             //Assert
             Assert.AreEqual(inkLeft, highlighter.Durability);
@@ -100,7 +100,7 @@ namespace PillarPencilKata
             var bigWhoppingZero = 0;
 
             //Act
-            Paper = NumberTwoPencil.WriteInputOntoPaper(barbaricYawp, Paper);
+            NumberTwoPencil.WriteInputOntoPaper(barbaricYawp, Paper);
 
             //Assert
             Assert.AreEqual(bigWhoppingZero, NumberTwoPencil.Durability);
@@ -116,7 +116,7 @@ namespace PillarPencilKata
             var whatWasHeard = "what i ";
 
             //Act
-            Paper = NumberTwoPencil.WriteInputOntoPaper(mumble, Paper);
+            NumberTwoPencil.WriteInputOntoPaper(mumble, Paper);
 
             //Assert
             StringAssert.AreEqualIgnoringCase(whatWasHeard, Paper.WrittenContent);
@@ -131,7 +131,7 @@ namespace PillarPencilKata
             var capitalLetter = "J";
 
             //Act
-            Paper = NumberTwoPencil.WriteInputOntoPaper(capitalLetter, Paper);
+            NumberTwoPencil.WriteInputOntoPaper(capitalLetter, Paper);
 
             //Assert
             Assert.AreNotEqual(capitalLetter, Paper.WrittenContent);
@@ -147,7 +147,7 @@ namespace PillarPencilKata
             var twoLetters = "jb";
 
             //Act
-            Paper = NumberTwoPencil.WriteInputOntoPaper(twoLetters, Paper);
+            NumberTwoPencil.WriteInputOntoPaper(twoLetters, Paper);
 
             //Assert
             Assert.AreEqual("j ", Paper.WrittenContent);
@@ -162,7 +162,7 @@ namespace PillarPencilKata
             var myInitials = "Jjb";
 
             //Act
-            Paper = NumberTwoPencil.WriteInputOntoPaper(myInitials, Paper);
+            NumberTwoPencil.WriteInputOntoPaper(myInitials, Paper);
 
             //Assert
             Assert.AreEqual("Jj ", Paper.WrittenContent);

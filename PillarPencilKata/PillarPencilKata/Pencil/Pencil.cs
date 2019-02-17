@@ -35,6 +35,13 @@ namespace PillarPencilKata.Pencil_Logic
             return Paper;
         }
 
+        public PaperModel Eraser(string input, PaperModel paper)
+        {
+           var lastInstanceOfInput = paper.WrittenContent.LastIndexOf(input);
+             paper.WrittenContent = paper.WrittenContent.Remove(lastInstanceOfInput, input.Length).Insert(lastInstanceOfInput, new string(' ', input.Length));
+            return paper;
+        }
+
         private string ReducePencilDurability(string input)
         {
             var letterArray = input.ToCharArray();
