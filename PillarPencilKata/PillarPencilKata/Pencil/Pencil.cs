@@ -33,7 +33,14 @@ namespace PillarPencilKata.Pencil_Logic
         public PaperModel Eraser(string input, PaperModel paper)
         {
            var lastInstanceOfInput = paper.WrittenContent.LastIndexOf(input);
-             paper.WrittenContent = paper.WrittenContent.Remove(lastInstanceOfInput, input.Length).Insert(lastInstanceOfInput, new string(' ', input.Length));
+            if(lastInstanceOfInput >= 0)
+            {
+                paper.WrittenContent = paper.WrittenContent.Remove(lastInstanceOfInput, input.Length).Insert(lastInstanceOfInput, new string(' ', input.Length));
+            }
+            else
+            {
+                return paper;
+            }
             return paper;
         }
 

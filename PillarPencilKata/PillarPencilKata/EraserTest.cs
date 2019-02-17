@@ -90,8 +90,24 @@ namespace PillarPencilKata
 
             //Assert
             Assert.AreEqual(instacesOfWordAfterTwoRemovals, Regex.Matches(Parchment.WrittenContent, wordToBeRemoved).Count);
+        }
 
+        [Test]
+        public void ProgramDoesntBreakIfWordToBeErasedDoesntExist()
+        {
+            //Arrange
+            PeacockQuil = new Pencil(1);
+            Parchment = new PaperModel()
+            {
+                WrittenContent = "wizarding world of wizards world"
+            };
+            var wordToBeRemoved = "gopher";
+            var instacesOfWordAfterTwoRemovals = 0;
 
+            PeacockQuil.Eraser(wordToBeRemoved, Parchment);
+
+            //Assert
+            Assert.AreEqual(instacesOfWordAfterTwoRemovals, Regex.Matches(Parchment.WrittenContent, wordToBeRemoved).Count);
         }
     }
 }
