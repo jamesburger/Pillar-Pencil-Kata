@@ -5,13 +5,21 @@ namespace PillarPencilKata.Pencil_Logic
 {
     public class Pencil : IPencil
     {
-        public int Durability { get; set; }
+        public int PencilDurability { get; set; }
+
+        public int EraserDurability { get; set; }
 
         private string NewSentence;
 
-        public Pencil(int durability)
+        public Pencil(int pencilDurability)
         {
-            Durability = durability;
+            PencilDurability = pencilDurability;
+        }
+
+        public Pencil(int pencilDurability, int eraserDurability)
+        {
+            PencilDurability = pencilDurability;
+            EraserDurability = eraserDurability;
         }
          
         public PaperModel WriteInputOntoPaper(string input, PaperModel Paper)
@@ -33,13 +41,16 @@ namespace PillarPencilKata.Pencil_Logic
         public PaperModel Eraser(string wordToBeDeleted, PaperModel paper)
         {
            var lastInstanceOfWordBeingDeleted = paper.WrittenContent.LastIndexOf(wordToBeDeleted);
-            if(lastInstanceOfWordBeingDeleted >= 0)
+            if(EraserDurability > 0)
             {
-                paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
-            }
-            else
-            {
-                return paper;
+                if(lastInstanceOfWordBeingDeleted >= 0)
+                {
+                    paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
+                }
+                else
+                {
+                    return paper;
+                }
             }
             return paper;
         }
@@ -49,7 +60,7 @@ namespace PillarPencilKata.Pencil_Logic
             var letterArray = input.ToCharArray();
             foreach(var letter in letterArray)
             {
-                if(Durability > 0)
+                if(PencilDurability > 0)
                 {
                     ParseLettersByCapitalizationOrWhitespace(letter);
                 }
@@ -79,21 +90,21 @@ namespace PillarPencilKata.Pencil_Logic
 
         private void UpperCaseLetterHandler(char letter)
         {
-            if (Durability == 1)
+            if (PencilDurability == 1)
             {
-                --Durability;
+                --PencilDurability;
                 NewSentence += char.ToLower(letter);
             }
             else
             {
-                Durability = Durability - 2;
+                PencilDurability = PencilDurability - 2;
                 NewSentence += letter;
             }
         }
 
         private void LowerCaseHandler(char letter)
         {
-            --Durability;
+            --PencilDurability;
             NewSentence += letter;
         }
 

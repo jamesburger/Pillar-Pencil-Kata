@@ -55,7 +55,7 @@ namespace PillarPencilKata
             var shinyNewMechanicalPencil = new Pencil(hunkOfGraphite);
 
             //Assert
-            Assert.AreEqual(hunkOfGraphite, shinyNewMechanicalPencil.Durability);
+            Assert.AreEqual(hunkOfGraphite, shinyNewMechanicalPencil.PencilDurability);
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace PillarPencilKata
             bicPen.WriteInputOntoPaper(groceryList, backOfEnvelope);
 
             //Assert
-            Assert.AreEqual(inkLeft, bicPen.Durability);
+            Assert.AreEqual(inkLeft, bicPen.PencilDurability);
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace PillarPencilKata
             highlighter.WriteInputOntoPaper(taxDeductiblePurchase, receipt);
 
             //Assert
-            Assert.AreEqual(inkLeft, highlighter.Durability);
+            Assert.AreEqual(inkLeft, highlighter.PencilDurability);
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace PillarPencilKata
             NumberTwoPencil.WriteInputOntoPaper(barbaricYawp, Paper);
 
             //Assert
-            Assert.AreEqual(bigWhoppingZero, NumberTwoPencil.Durability);
+            Assert.AreEqual(bigWhoppingZero, NumberTwoPencil.PencilDurability);
         }
 
         [Test]
