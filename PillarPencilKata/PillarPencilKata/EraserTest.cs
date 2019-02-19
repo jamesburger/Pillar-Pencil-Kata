@@ -170,5 +170,29 @@ namespace PillarPencilKata
             Assert.AreEqual(expectedInstancesOfHalfWords, Regex.Matches(Parchment.WrittenContent, lettersLeftWhenEraserRunsOut).Count);
             Assert.AreNotEqual(expectedInstancesOfHalfWords, Regex.Matches(Parchment.WrittenContent, wordToBeErased).Count);
         }
+
+        [Test]
+        public void NoNewWordsMayBeErasedOnceEraserWornOut()
+        {
+            //Arrange
+            PeacockQuill = new Pencil(0, 4);
+            Parchment = new PaperModel()
+            {
+                WrittenContent = "Maple syrup is tree marinade"
+            };
+            var firstWordToBeDeleted = "tree";
+            var secondWordToBeDeleted = "Maple";
+            var expectedInstancesOfFirstWord = 0;
+            var expectedInstancesOfSecondWord = 1;
+
+            //Act
+            PeacockQuill.Eraser(firstWordToBeDeleted, Parchment);
+            PeacockQuill.Eraser(secondWordToBeDeleted, Parchment);
+
+            //Assert
+            Assert.AreEqual(expectedInstancesOfFirstWord, Regex.Matches(Parchment.WrittenContent, firstWordToBeDeleted).Count);
+            Assert.AreEqual(expectedInstancesOfSecondWord, Regex.Matches(Parchment.WrittenContent, secondWordToBeDeleted).Count);
+
+        }
     }
 }
