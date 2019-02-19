@@ -7,7 +7,7 @@ namespace PillarPencilKata.Pencil_Logic
     {
         public int PencilDurability { get; set; }
 
-        public int EraserDurability { get; set; }
+        public int? EraserDurability { get; set; }
 
         private string NewSentence;
 
@@ -41,16 +41,32 @@ namespace PillarPencilKata.Pencil_Logic
         public PaperModel Eraser(string wordToBeDeleted, PaperModel paper)
         {
            var lastInstanceOfWordBeingDeleted = paper.WrittenContent.LastIndexOf(wordToBeDeleted);
-            if(EraserDurability > 0)
+
+            if (lastInstanceOfWordBeingDeleted >= 0)
             {
-                if(lastInstanceOfWordBeingDeleted >= 0)
+                if(EraserDurability == null)
                 {
                     paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
-                }
-                else
-                {
                     return paper;
                 }
+                var newString = "";
+                foreach(var letter in wordToBeDeleted.ToCharArray())
+                {
+                    if (EraserDurability > 0)
+                    {
+                        newString += letter;
+                        if (!char.IsWhiteSpace(letter))
+                        {
+                            --EraserDurability;
+                        }
+                    }
+                    else
+                    {
+                        return paper;
+                    }
+                }
+                        paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, newString, lastInstanceOfWordBeingDeleted);
+
             }
             return paper;
         }

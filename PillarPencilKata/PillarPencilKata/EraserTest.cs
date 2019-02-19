@@ -128,5 +128,26 @@ namespace PillarPencilKata
             //Assert
             Assert.AreEqual(instancesOfWordToBeErased, Regex.Matches(Parchment.WrittenContent, wordToBeErased).Count);
         }
+
+        [Test]
+        public void EraserWithDurabilityOfTwoErasesTwoLetters()
+        {
+            //Arrange
+            PeacockQuil = new Pencil(1, 2);
+            Parchment = new PaperModel()
+            {
+                WrittenContent = "You don't know me"
+            };
+            var wordToBeErased = "me";
+            var expectedInstancesOfDeletedWord = 0;
+            
+
+            //Act
+            PeacockQuil.Eraser(wordToBeErased, Parchment);
+
+            //Assert
+            Assert.AreEqual(expectedInstancesOfDeletedWord, Regex.Matches(Parchment.WrittenContent, wordToBeErased).Count);
+            Assert.AreEqual(expectedInstancesOfDeletedWord, PeacockQuil.EraserDurability);
+        }
     }
 }
