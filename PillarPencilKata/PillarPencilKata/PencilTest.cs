@@ -18,7 +18,7 @@ namespace PillarPencilKata
             //Arrange
             var letterToSanta = "Dear Santa, I hope you're well";
             var constructionPaper = new PaperModel();
-            NumberTwoPencil = new Pencil(30);
+            NumberTwoPencil = new Pencil();
 
             //Act
             NumberTwoPencil.WriteInputOntoPaper(letterToSanta, constructionPaper);
@@ -34,7 +34,7 @@ namespace PillarPencilKata
             var letterToGrandma = "Thanks so much for the five dollars you sent for my birthday. ";
             var letterContinued = "Dad reassures me you understand what inflation is. I'm not convinced.";
             var collegeRule = new PaperModel();
-            NumberTwoPencil = new Pencil(200);
+            NumberTwoPencil = new Pencil();
 
             //Act
             NumberTwoPencil.WriteInputOntoPaper(letterToGrandma, collegeRule);

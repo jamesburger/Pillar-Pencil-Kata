@@ -6,11 +6,15 @@ namespace PillarPencilKata.Pencil_Logic
 {
     public class Pencil : IPencil
     {
-        public int PencilDurability { get; set; }
+        public int? PencilDurability { get; set; }
 
         public int? EraserDurability { get; set; }
 
         private string NewSentence;
+
+        public Pencil()
+        {
+        }
 
         public Pencil(int pencilDurability)
         {
@@ -50,20 +54,14 @@ namespace PillarPencilKata.Pencil_Logic
                     paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
                     return paper;
                 }
-                var counter = 0;
-                foreach (var letter in wordToBeDeleted.ToCharArray())
-                {
-                    if (EraserDurability > 0)
-                    {
-                        ++counter;
-                        if (!char.IsWhiteSpace(letter))
-                        {
-                            --EraserDurability;
-                        }
-                    }
-                 }
-                var adjustLastInstaceByEraserDurability = wordToBeDeleted.Length - counter;
-                paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted.Substring(adjustLastInstaceByEraserDurability), (lastInstanceOfWordBeingDeleted + adjustLastInstaceByEraserDurability));
+
+                var numberOfLettersToBeReplacedByWhitespace = FindLettersToBeErasedByEraserDurability(wordToBeDeleted);
+
+                var indexAdjustment = wordToBeDeleted.Length - numberOfLettersToBeReplacedByWhitespace;
+
+                var lastIndexPositionAdjustedForDurability = lastInstanceOfWordBeingDeleted + indexAdjustment;
+
+                paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted.Substring(indexAdjustment), lastIndexPositionAdjustedForDurability);
 
             }
             return paper;
@@ -72,6 +70,10 @@ namespace PillarPencilKata.Pencil_Logic
         private string ReducePencilDurability(string input)
         {
             var letterArray = input.ToCharArray();
+            if(PencilDurability == null)
+            {
+                return NewSentence += input;
+            }
             foreach(var letter in letterArray)
             {
                 if(PencilDurability > 0)
@@ -122,9 +124,26 @@ namespace PillarPencilKata.Pencil_Logic
             NewSentence += letter;
         }
 
-        public string RemoveSpecifiedWordAndReplaceWithWhiteSpace(string originalSentence, string wordBeingRemoved, int indexPostion)
+        private string RemoveSpecifiedWordAndReplaceWithWhiteSpace(string originalSentence, string wordBeingRemoved, int indexPostion)
         {
             return originalSentence.Remove(indexPostion, wordBeingRemoved.Length).Insert(indexPostion, new string(' ', wordBeingRemoved.Length));
+        }
+
+        private int FindLettersToBeErasedByEraserDurability(string wordBeingErased)
+        {
+            var counter = 0;
+            foreach (var letter in wordBeingErased.ToCharArray())
+            {
+                if (EraserDurability > 0)
+                {
+                    ++counter;
+                    if (!char.IsWhiteSpace(letter))
+                    {
+                        --EraserDurability;
+                    }
+                }
+            }
+            return counter;
         }
     }
 }
