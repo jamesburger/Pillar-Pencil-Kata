@@ -1,4 +1,5 @@
 ﻿using PillarPencilKata.Models;
+using System;
 using System.Collections.Generic;
 
 namespace PillarPencilKata.Pencil_Logic
@@ -49,23 +50,20 @@ namespace PillarPencilKata.Pencil_Logic
                     paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
                     return paper;
                 }
-                var newString = "";
-                foreach(var letter in wordToBeDeleted.ToCharArray())
+                var counter = 0;
+                foreach (var letter in wordToBeDeleted.ToCharArray())
                 {
                     if (EraserDurability > 0)
                     {
-                        newString += letter;
+                        ++counter;
                         if (!char.IsWhiteSpace(letter))
                         {
                             --EraserDurability;
                         }
                     }
-                    else
-                    {
-                        return paper;
-                    }
-                }
-                        paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, newString, lastInstanceOfWordBeingDeleted);
+                 }
+                var adjustLastInstaceByEraserDurability = wordToBeDeleted.Length - counter;
+                paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted.Substring(adjustLastInstaceByEraserDurability), (lastInstanceOfWordBeingDeleted + adjustLastInstaceByEraserDurability));
 
             }
             return paper;

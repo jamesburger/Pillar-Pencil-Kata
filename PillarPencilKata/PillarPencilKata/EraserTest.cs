@@ -7,7 +7,7 @@ namespace PillarPencilKata
 {
     public class EraserTest
     {
-        private Pencil PeacockQuil;
+        private Pencil PeacockQuill;
 
         private PaperModel Parchment;
 
@@ -15,7 +15,7 @@ namespace PillarPencilKata
         public void RemoveLastInstanceOfGivenWord()
         {
             //Arrange
-            PeacockQuil = new Pencil(1);
+            PeacockQuill = new Pencil(1);
             Parchment = new PaperModel()
             {
                 WrittenContent = "I like coffee wakes me up makes me fast I love coffee"
@@ -24,7 +24,7 @@ namespace PillarPencilKata
             var numberOfCoffeesAfterEraser = 1;
 
             //Act
-            PeacockQuil.Eraser(wordToRemove, Parchment);
+            PeacockQuill.Eraser(wordToRemove, Parchment);
 
             //Assert
             Assert.AreEqual(numberOfCoffeesAfterEraser, Regex.Matches(Parchment.WrittenContent, wordToRemove).Count);
@@ -34,7 +34,7 @@ namespace PillarPencilKata
         public void ReplaceErasedWordWithWhiteSpace()
         {
             //Arrange
-            PeacockQuil = new Pencil(1);
+            PeacockQuill = new Pencil(1);
             Parchment = new PaperModel() {
                 WrittenContent = "Troll in the dungeon, thought you ought to know"
             };
@@ -44,7 +44,7 @@ namespace PillarPencilKata
             var instancesOfNewWhiteSpace = 1;
 
             //Act
-            PeacockQuil.Eraser(wordToRemove, Parchment);
+            PeacockQuill.Eraser(wordToRemove, Parchment);
 
             //Assert
             Assert.AreEqual(instancesOfNewWhiteSpace, Regex.Matches(Parchment.WrittenContent, newWhiteSpace).Count);
@@ -56,7 +56,7 @@ namespace PillarPencilKata
         public void ReplaceWordsInTheMiddleOfTheSentence()
         {
             //Arrange
-            PeacockQuil = new Pencil(1);
+            PeacockQuill = new Pencil(1);
             Parchment = new PaperModel()
             {
                 WrittenContent = "Better be Gryffidor"
@@ -65,7 +65,7 @@ namespace PillarPencilKata
             var instancesOfWordAfterRemoval = 0;
 
             //Act
-            PeacockQuil.Eraser(wordToRemove, Parchment);
+            PeacockQuill.Eraser(wordToRemove, Parchment);
 
             //Assert
             Assert.AreEqual(instancesOfWordAfterRemoval, Regex.Matches(Parchment.WrittenContent, wordToRemove).Count);
@@ -76,7 +76,7 @@ namespace PillarPencilKata
         public void ErasingTheSameWordTwiceErasesTheLastTwoInstancesOfTheWord()
         {
             //Arrange
-            PeacockQuil = new Pencil(1);
+            PeacockQuill = new Pencil(1);
             Parchment = new PaperModel()
             {
                 WrittenContent = "wizarding world of wizards world"
@@ -85,8 +85,8 @@ namespace PillarPencilKata
             var instacesOfWordAfterTwoRemovals = 0;
 
             //Act
-            PeacockQuil.Eraser(wordToBeRemoved, Parchment);
-            PeacockQuil.Eraser(wordToBeRemoved, Parchment);
+            PeacockQuill.Eraser(wordToBeRemoved, Parchment);
+            PeacockQuill.Eraser(wordToBeRemoved, Parchment);
 
             //Assert
             Assert.AreEqual(instacesOfWordAfterTwoRemovals, Regex.Matches(Parchment.WrittenContent, wordToBeRemoved).Count);
@@ -96,7 +96,7 @@ namespace PillarPencilKata
         public void ProgramDoesntBreakIfWordToBeErasedDoesntExist()
         {
             //Arrange
-            PeacockQuil = new Pencil(1);
+            PeacockQuill = new Pencil(1);
             Parchment = new PaperModel()
             {
                 WrittenContent = "wizarding world of wizards world"
@@ -104,7 +104,7 @@ namespace PillarPencilKata
             var wordToBeRemoved = "gopher";
             var instacesOfWordAfterTwoRemovals = 0;
 
-            PeacockQuil.Eraser(wordToBeRemoved, Parchment);
+            PeacockQuill.Eraser(wordToBeRemoved, Parchment);
 
             //Assert
             Assert.AreEqual(instacesOfWordAfterTwoRemovals, Regex.Matches(Parchment.WrittenContent, wordToBeRemoved).Count);
@@ -114,7 +114,7 @@ namespace PillarPencilKata
         public void EraserWithZeroDurabilityDoesntErase()
         {
             //Arrange
-            PeacockQuil = new Pencil(1, 0);
+            PeacockQuill = new Pencil(1, 0);
             Parchment = new PaperModel()
             {
                 WrittenContent = "Haha you can't erase me"
@@ -123,7 +123,7 @@ namespace PillarPencilKata
             var instancesOfWordToBeErased = 1;
 
             //Act
-            PeacockQuil.Eraser(wordToBeErased, Parchment);
+            PeacockQuill.Eraser(wordToBeErased, Parchment);
 
             //Assert
             Assert.AreEqual(instancesOfWordToBeErased, Regex.Matches(Parchment.WrittenContent, wordToBeErased).Count);
@@ -133,7 +133,7 @@ namespace PillarPencilKata
         public void EraserWithDurabilityOfTwoErasesTwoLetters()
         {
             //Arrange
-            PeacockQuil = new Pencil(1, 2);
+            PeacockQuill = new Pencil(1, 2);
             Parchment = new PaperModel()
             {
                 WrittenContent = "You don't know me"
@@ -143,11 +143,32 @@ namespace PillarPencilKata
             
 
             //Act
-            PeacockQuil.Eraser(wordToBeErased, Parchment);
+            PeacockQuill.Eraser(wordToBeErased, Parchment);
 
             //Assert
             Assert.AreEqual(expectedInstancesOfDeletedWord, Regex.Matches(Parchment.WrittenContent, wordToBeErased).Count);
-            Assert.AreEqual(expectedInstancesOfDeletedWord, PeacockQuil.EraserDurability);
+            Assert.AreEqual(expectedInstancesOfDeletedWord, PeacockQuill.EraserDurability);
+        }
+
+        [Test]
+        public void VerifyLowDurabilityErasesExpectedLetters()
+        {
+            //Arrange 
+            PeacockQuill = new Pencil(0, 2);
+            Parchment = new PaperModel()
+            {
+              WrittenContent = "You might know me"
+            };
+            var wordToBeErased = "know";
+            var lettersLeftWhenEraserRunsOut = "kn  ";
+            var expectedInstancesOfHalfWords = 1;
+
+            //Act
+            PeacockQuill.Eraser(wordToBeErased, Parchment);
+
+            //Assert
+            Assert.AreEqual(expectedInstancesOfHalfWords, Regex.Matches(Parchment.WrittenContent, lettersLeftWhenEraserRunsOut).Count);
+            Assert.AreNotEqual(expectedInstancesOfHalfWords, Regex.Matches(Parchment.WrittenContent, wordToBeErased).Count);
         }
     }
 }
