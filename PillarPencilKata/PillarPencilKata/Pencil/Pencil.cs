@@ -9,7 +9,10 @@ namespace PillarPencilKata.Pencil_Logic
         public int? PencilDurability { get; set; }
 
         public int? EraserDurability { get; set; }
+
         public int? PencilLength { get; set; }
+
+        public int IndexOfLastErasedWord { get; private set; }
 
         private string NewSentence;
 
@@ -40,6 +43,7 @@ namespace PillarPencilKata.Pencil_Logic
                 if(EraserDurability == null)
                 {
                     paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
+                    IndexOfLastErasedWord = lastInstanceOfWordBeingDeleted;
                     return paper;
                 }
 
@@ -48,6 +52,8 @@ namespace PillarPencilKata.Pencil_Logic
                 var indexAdjustment = wordToBeDeleted.Length - numberOfLettersToBeReplacedByWhitespace;
 
                 var lastIndexPositionAdjustedForDurability = lastInstanceOfWordBeingDeleted + indexAdjustment;
+
+                IndexOfLastErasedWord = lastIndexPositionAdjustedForDurability;
 
                 paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted.Substring(indexAdjustment), lastIndexPositionAdjustedForDurability);
 
@@ -63,8 +69,12 @@ namespace PillarPencilKata.Pencil_Logic
             }
             else
             {
-                --PencilLength;
-                PencilDurability = OriginalSharpness;
+                if(PencilLength > 0)
+                {
+                    --PencilLength;
+                    PencilDurability = OriginalSharpness;
+                }
+               
             }
         }
 
@@ -160,6 +170,7 @@ namespace PillarPencilKata.Pencil_Logic
         public Pencil(int pencilDurability, int eraserDurability)
         {
             PencilDurability = pencilDurability;
+            OriginalSharpness = pencilDurability;
             EraserDurability = eraserDurability;
         }
 

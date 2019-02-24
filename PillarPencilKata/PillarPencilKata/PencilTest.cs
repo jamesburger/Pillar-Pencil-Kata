@@ -12,6 +12,7 @@ namespace PillarPencilKata
 
         private PaperModel Paper;
 
+        #region Pencil Writing Functionality
         [Test]
         public void PaperContainsTextPencilWrites()
         {
@@ -43,7 +44,10 @@ namespace PillarPencilKata
             //Assert
             StringAssert.AreEqualIgnoringCase(letterToGrandma += letterContinued, collegeRule.WrittenContent);
 
-        }
+        } 
+        #endregion
+       
+        #region Pencil Durability
 
         [Test]
         public void PencilIsGivenADurabilityValueUponCreation()
@@ -167,5 +171,29 @@ namespace PillarPencilKata
             //Assert
             Assert.AreEqual("Jj ", Paper.WrittenContent);
         }
+        #endregion
+
+        #region Replacing Erased Words
+
+        [Test]
+        public void IndexOfLastWordErasedSavedAsClassProperty()
+        {
+            //Arrange
+            var stringBeingWritten = "This cantelope is tasty";
+            var expectedIndexPosition = 5;
+            var wordToBeDeleted = "cantelope";
+            NumberTwoPencil = new Pencil();
+            Paper = new PaperModel() {
+                WrittenContent = stringBeingWritten
+            };
+
+            //Act
+            NumberTwoPencil.Eraser(wordToBeDeleted, Paper);
+
+            //Assert
+            Assert.AreEqual(expectedIndexPosition, NumberTwoPencil.IndexOfLastErasedWord);
+        }
+
+        #endregion
     }
 }

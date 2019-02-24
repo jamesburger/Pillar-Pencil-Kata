@@ -93,7 +93,23 @@ namespace PillarPencilKata
 
             //Assert
             Assert.AreEqual(lengthAfterSharpening, HydratedPencil.PencilLength);
+        }
 
+        [Test]
+        public void APencilWithLengthReducedToZeroWillNotSharpenAgain()
+        {
+            //Arrange
+            HydratedPencil.PencilLength = 0;
+            Paper = new PaperModel();
+            var expectedDurability = 4;
+            var aWord = "A word";
+
+            //Act
+            HydratedPencil.WriteInputOntoPaper(aWord, Paper);
+            HydratedPencil.Sharpen();
+
+            //Assert
+            Assert.AreEqual(expectedDurability, HydratedPencil.PencilDurability);
         }
     }
 }
