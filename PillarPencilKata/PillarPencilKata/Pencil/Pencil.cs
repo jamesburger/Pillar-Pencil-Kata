@@ -80,14 +80,12 @@ namespace PillarPencilKata.Pencil_Logic
 
         public PaperModel ReplaceErasedWord(string wordReplacement, PaperModel paper)
         {
-            var symbol = '@';
-            var spaceBeingFilledByReplacementWord = paper.WrittenContent.Substring(IndexOfLastErasedWord, wordReplacement.Length);
-            var newString = "";
-            for(int i = 0; i < wordReplacement.Length; i++)
-            {
-                newString += char.IsWhiteSpace(spaceBeingFilledByReplacementWord[i]) ? wordReplacement[i] : symbol;
-            }
-            paper.WrittenContent = paper.WrittenContent.Remove(IndexOfLastErasedWord, wordReplacement.Length).Insert(IndexOfLastErasedWord, newString);
+            var spaceBeingFilledByReplacementWord = FindSubstringBeingReplacedByNewWord(paper.WrittenContent, wordReplacement); 
+
+            var replacementWordAccountingForOverlap = BuildReplacementStringAccountingForOverlap(spaceBeingFilledByReplacementWord, wordReplacement);
+
+            paper.WrittenContent = paper.WrittenContent.Remove(IndexOfLastErasedWord, wordReplacement.Length).Insert(IndexOfLastErasedWord, replacementWordAccountingForOverlap);
+
             return paper;
         }
 
@@ -170,6 +168,21 @@ namespace PillarPencilKata.Pencil_Logic
             return counter;
         }
 
+        private string FindSubstringBeingReplacedByNewWord(string writtenContent, string wordReplacement)
+        {
+            return writtenContent.Substring(IndexOfLastErasedWord, wordReplacement.Length);
+        }
+
+        private string BuildReplacementStringAccountingForOverlap(string substringBeingReplaced, string wordReplacement)
+        {
+            var symbol = '@';
+            var replacementWordAccountingForOverlap = "";
+            for (int i = 0; i < wordReplacement.Length; i++)
+            {
+                replacementWordAccountingForOverlap += char.IsWhiteSpace(substringBeingReplaced[i]) ? wordReplacement[i] : symbol;
+            }
+            return replacementWordAccountingForOverlap;
+        }
         public Pencil()
         {
         }
