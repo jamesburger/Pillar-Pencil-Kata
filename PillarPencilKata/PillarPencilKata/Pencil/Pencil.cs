@@ -80,7 +80,14 @@ namespace PillarPencilKata.Pencil_Logic
 
         public PaperModel ReplaceErasedWord(string wordReplacement, PaperModel paper)
         {
-            paper.WrittenContent = paper.WrittenContent.Remove(IndexOfLastErasedWord, wordReplacement.Length).Insert(IndexOfLastErasedWord, wordReplacement);
+            var symbol = '@';
+            var spaceBeingFilledByReplacementWord = paper.WrittenContent.Substring(IndexOfLastErasedWord, wordReplacement.Length);
+            var newString = "";
+            for(int i = 0; i < wordReplacement.Length; i++)
+            {
+                newString += char.IsWhiteSpace(spaceBeingFilledByReplacementWord[i]) ? wordReplacement[i] : symbol;
+            }
+            paper.WrittenContent = paper.WrittenContent.Remove(IndexOfLastErasedWord, wordReplacement.Length).Insert(IndexOfLastErasedWord, newString);
             return paper;
         }
 

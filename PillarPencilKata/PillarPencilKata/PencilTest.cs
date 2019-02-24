@@ -44,9 +44,9 @@ namespace PillarPencilKata
             //Assert
             StringAssert.AreEqualIgnoringCase(letterToGrandma += letterContinued, collegeRule.WrittenContent);
 
-        } 
+        }
         #endregion
-       
+
         #region Pencil Durability
 
         [Test]
@@ -202,8 +202,8 @@ namespace PillarPencilKata
             var stringBeingWritten = "This ham is tasty";
             var expectedIndexPosition = 5;
             var wordToBeDeleted = "ham";
-            var replacementWord = "steak";
-            
+            var replacementWord = "egg";
+
             NumberTwoPencil = new Pencil();
             Paper = new PaperModel()
             {
@@ -242,13 +242,13 @@ namespace PillarPencilKata
         }
 
         [Test]
-        public void ReplacementWordLongerThanErasedWordOverlapsOtherLetters()
+        public void LettersOverlappedByReplacementWordReplacedWithSymbol()
         {
             //Arrange                      
             var stringBeingWritten = "This ham is tasty";
             var wordToBeDeleted = "ham";
             var replacementWord = "steak";
-            var expectedNewString = "This steaks tasty";
+            var expectedNewString = "This stea@s tasty";
 
             NumberTwoPencil = new Pencil();
             Paper = new PaperModel()
@@ -263,6 +263,7 @@ namespace PillarPencilKata
             //Assert
             StringAssert.AreEqualIgnoringCase(expectedNewString, Paper.WrittenContent);
         }
+            
         #endregion
     }
 }
