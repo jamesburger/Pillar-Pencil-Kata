@@ -12,7 +12,26 @@ namespace PillarPencilKata
     {
         private Pencil Pencil;
 
+        private Pencil HydratedPencil;
+
         private PaperModel Paper;
+
+        [SetUp]
+        public void Setup()
+        {
+            var pencilLength = 4;
+            var pencilDurability = 10;
+            var eraserDurability = 10;
+            HydratedPencil = new Pencil(pencilDurability, eraserDurability, pencilLength);
+        }
+
+        [TearDown]
+        public void SharpenerTearDown()
+        {
+            HydratedPencil.PencilDurability = null;
+            HydratedPencil.EraserDurability = null;
+            HydratedPencil.PencilLength = null;
+        }
 
         [Test]
         public void PencilRecordsOriginalDurabilityOnConstruction()
@@ -57,6 +76,23 @@ namespace PillarPencilKata
 
             //Assert
             Assert.AreEqual(pencilLength, Pencil.PencilLength);
+        }
+
+        [Test]
+        public void UsingSharpenMethodDecrementsPencilLengthByOne()
+        {
+            //Assert
+          
+            var lengthAfterSharpening = 3;
+            var aWord = "A word";
+            Paper = new PaperModel();
+
+            //Act
+            HydratedPencil.WriteInputOntoPaper(aWord, Paper);
+            HydratedPencil.Sharpen();
+
+            //Assert
+            Assert.AreEqual(lengthAfterSharpening, HydratedPencil.PencilLength);
 
         }
     }

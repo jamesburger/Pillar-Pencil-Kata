@@ -9,7 +9,7 @@ namespace PillarPencilKata.Pencil_Logic
         public int? PencilDurability { get; set; }
 
         public int? EraserDurability { get; set; }
-        public int? PencilLength { get; private set; }
+        public int? PencilLength { get; set; }
 
         private string NewSentence;
 
@@ -57,7 +57,15 @@ namespace PillarPencilKata.Pencil_Logic
 
         public void Sharpen()
         {
-            PencilDurability = OriginalSharpness;
+            if(PencilLength == null)
+            {
+                PencilDurability = OriginalSharpness;
+            }
+            else
+            {
+                --PencilLength;
+                PencilDurability = OriginalSharpness;
+            }
         }
 
         private string ReducePencilDurability(string input)
