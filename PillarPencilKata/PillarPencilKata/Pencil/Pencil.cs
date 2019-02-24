@@ -12,21 +12,8 @@ namespace PillarPencilKata.Pencil_Logic
 
         private string NewSentence;
 
-        public Pencil()
-        {
-        }
+        public readonly int OriginalSharpness;
 
-        public Pencil(int pencilDurability)
-        {
-            PencilDurability = pencilDurability;
-        }
-
-        public Pencil(int pencilDurability, int eraserDurability)
-        {
-            PencilDurability = pencilDurability;
-            EraserDurability = eraserDurability;
-        }
-         
         public PaperModel WriteInputOntoPaper(string input, PaperModel Paper)
         {
             if(Paper.WrittenContent == null)
@@ -144,6 +131,22 @@ namespace PillarPencilKata.Pencil_Logic
                 }
             }
             return counter;
+        }
+
+        public Pencil()
+        {
+        }
+
+        public Pencil(int pencilDurability)
+        {
+            PencilDurability = pencilDurability;
+            OriginalSharpness = pencilDurability;
+        }
+
+        public Pencil(int pencilDurability, int eraserDurability)
+        {
+            PencilDurability = pencilDurability;
+            EraserDurability = eraserDurability;
         }
     }
 }
