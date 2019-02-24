@@ -54,6 +54,11 @@ namespace PillarPencilKata.Pencil_Logic
             return paper;
         }
 
+        public void Sharpen()
+        {
+            PencilDurability = OriginalSharpness;
+        }
+
         private string ReducePencilDurability(string input)
         {
             var letterArray = input.ToCharArray();

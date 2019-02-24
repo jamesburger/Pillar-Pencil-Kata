@@ -26,5 +26,22 @@ namespace PillarPencilKata
             //Assert
             Assert.AreEqual(inputDurability, Pencil.OriginalSharpness);
         }
+
+        [Test]
+        public void SharpenerMethodSetsDurabilityEqualToOriginalSharpeness()
+        {
+            //Arrange
+            var inputDurability = 100;
+            var sentenceToBeWritten = "Tip toe through the tulips";
+            Pencil = new Pencil(inputDurability);
+            Paper = new PaperModel();
+
+            //Act
+            Pencil.WriteInputOntoPaper(sentenceToBeWritten, Paper);
+            Pencil.Sharpen();
+
+            //Assert
+            Assert.AreEqual(inputDurability, Pencil.PencilDurability);
+        }
     }
 }
