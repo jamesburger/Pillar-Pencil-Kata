@@ -194,6 +194,31 @@ namespace PillarPencilKata
             Assert.AreEqual(expectedIndexPosition, NumberTwoPencil.IndexOfLastErasedWord);
         }
 
+
+        [Test]
+        public void InsertWordAtStoredIndex()
+        {
+            //Arrange                      
+            var stringBeingWritten = "This ham is tasty";
+            var expectedIndexPosition = 5;
+            var wordToBeDeleted = "ham";
+            var replacementWord = "steak";
+            
+            NumberTwoPencil = new Pencil();
+            Paper = new PaperModel()
+            {
+                WrittenContent = stringBeingWritten
+            };
+
+            //Act
+            NumberTwoPencil.Eraser(wordToBeDeleted, Paper);
+            NumberTwoPencil.ReplaceErasedWord(replacementWord, Paper);
+
+            //Assert
+            Assert.AreEqual(expectedIndexPosition, Paper.WrittenContent.IndexOf(replacementWord));
+        }
+
+
         #endregion
     }
 }

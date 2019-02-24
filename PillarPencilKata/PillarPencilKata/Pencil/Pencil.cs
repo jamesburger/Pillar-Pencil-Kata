@@ -78,6 +78,12 @@ namespace PillarPencilKata.Pencil_Logic
             }
         }
 
+        public PaperModel ReplaceErasedWord(string wordReplacement, PaperModel paper)
+        {
+            paper.WrittenContent = paper.WrittenContent.Insert(IndexOfLastErasedWord, wordReplacement);
+            return paper;
+        }
+
         private string ReducePencilDurability(string input)
         {
             var letterArray = input.ToCharArray();
