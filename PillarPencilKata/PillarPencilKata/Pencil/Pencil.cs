@@ -9,6 +9,7 @@ namespace PillarPencilKata.Pencil_Logic
         public int? PencilDurability { get; set; }
 
         public int? EraserDurability { get; set; }
+        public int? PencilLength { get; private set; }
 
         private string NewSentence;
 
@@ -152,6 +153,14 @@ namespace PillarPencilKata.Pencil_Logic
         {
             PencilDurability = pencilDurability;
             EraserDurability = eraserDurability;
+        }
+
+        public Pencil(int pencilDurability, int eraserDurability, int pencilLength)
+        {
+            PencilDurability = pencilDurability;
+            OriginalSharpness = pencilDurability;
+            EraserDurability = eraserDurability;
+            PencilLength = pencilLength;
         }
     }
 }

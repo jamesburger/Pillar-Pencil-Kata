@@ -43,5 +43,21 @@ namespace PillarPencilKata
             //Assert
             Assert.AreEqual(inputDurability, Pencil.PencilDurability);
         }
+
+        [Test]
+        public void PencilCanBeCreatedWithInitialLengthProperty()
+        {
+            //Arrange
+            var pencilLength = 4;
+            var pencilDurability = 10;
+            var eraserDurability = 10;
+
+            //Act
+            Pencil = new Pencil(pencilDurability, eraserDurability, pencilLength);
+
+            //Assert
+            Assert.AreEqual(pencilLength, Pencil.PencilLength);
+
+        }
     }
 }
