@@ -240,6 +240,29 @@ namespace PillarPencilKata
             //Assert
             StringAssert.AreEqualIgnoringCase(expectedNewString, Paper.WrittenContent);
         }
+
+        [Test]
+        public void ReplacementWordLongerThanErasedWordOverlapsOtherLetters()
+        {
+            //Arrange                      
+            var stringBeingWritten = "This ham is tasty";
+            var wordToBeDeleted = "ham";
+            var replacementWord = "steak";
+            var expectedNewString = "This steaks tasty";
+
+            NumberTwoPencil = new Pencil();
+            Paper = new PaperModel()
+            {
+                WrittenContent = stringBeingWritten
+            };
+
+            //Act
+            NumberTwoPencil.Eraser(wordToBeDeleted, Paper);
+            NumberTwoPencil.ReplaceErasedWord(replacementWord, Paper);
+
+            //Assert
+            StringAssert.AreEqualIgnoringCase(expectedNewString, Paper.WrittenContent);
+        }
         #endregion
     }
 }
