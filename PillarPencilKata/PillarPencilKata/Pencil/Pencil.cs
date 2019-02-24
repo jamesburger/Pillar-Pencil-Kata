@@ -80,7 +80,7 @@ namespace PillarPencilKata.Pencil_Logic
 
         public PaperModel ReplaceErasedWord(string wordReplacement, PaperModel paper)
         {
-            paper.WrittenContent = paper.WrittenContent.Insert(IndexOfLastErasedWord, wordReplacement);
+            paper.WrittenContent = paper.WrittenContent.Remove(IndexOfLastErasedWord, wordReplacement.Length).Insert(IndexOfLastErasedWord, wordReplacement);
             return paper;
         }
 
