@@ -14,9 +14,9 @@ namespace PillarPencilKata.Pencil_Logic
 
         public int IndexOfLastErasedWord { get; private set; }
 
-        private string NewSentence;
+        public int OriginalSharpness { get; private set; }
 
-        public readonly int OriginalSharpness;
+        private string NewSentence;
 
         public PaperModel WriteInputOntoPaper(string input, PaperModel Paper)
         {

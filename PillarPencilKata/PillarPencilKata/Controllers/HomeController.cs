@@ -5,34 +5,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PillarPencilKata.Models;
+using PillarPencilKata.Pencil_Logic;
 
 namespace PillarPencilKata.Controllers
 {
     public class HomeController : Controller
     {
+        private IPencil Pencil;
+
+        public HomeController(IPencil pencil)
+        {
+           Pencil = pencil;
+        }
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public IActionResult Write(string input)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            PaperModel Paper = new PaperModel();
+            Pencil.WriteInputOntoPaper(input, Paper);
+            return View("Index", Paper);
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+      
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
