@@ -6,7 +6,7 @@ namespace PillarPencilKata.Pencil_Logic
     {
         PaperModel WriteInputOntoPaper(string input, PaperModel paper);
 
-        PaperModel Eraser(string input, PaperModel paper);
+        PaperModel UseEraser(string input, PaperModel paper);
 
         PaperModel ReplaceErasedWord(string replacementWord, PaperModel paper);
 

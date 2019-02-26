@@ -8,5 +8,7 @@ namespace PillarPencilKata.Models
     public class PaperModel
     {
         public string WrittenContent;
+
+        public int SpaceWhereErasedWordWas;
     }
 }

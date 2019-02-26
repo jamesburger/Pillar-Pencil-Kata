@@ -1,4 +1,5 @@
 ﻿using PillarPencilKata.Models;
+using PillarPencilKata.Eraser;
 using System;
 using System.Collections.Generic;
 
@@ -16,16 +17,19 @@ namespace PillarPencilKata.Pencil_Logic
 
         public int? OriginalSharpness { get; private set; }
 
+        public readonly Eraser.Eraser Eraser;
+
 
         public Pencil()
         {
+            Eraser = new Eraser.Eraser(null);
         }
 
         public Pencil(int? pencilDurability = null, int? eraserDurability = null, int? pencilLength = null)
         {
             PencilDurability = pencilDurability;
             OriginalSharpness = pencilDurability;
-            EraserDurability = eraserDurability;
+            Eraser = new Eraser.Eraser(eraserDurability);
             PencilLength = pencilLength;
         }
 
@@ -48,30 +52,10 @@ namespace PillarPencilKata.Pencil_Logic
             return Paper;
         }
 
-        public PaperModel Eraser(string wordToBeDeleted, PaperModel paper)
+        public PaperModel UseEraser(string input, PaperModel paper)
         {
-           var lastInstanceOfWordBeingDeleted = paper.WrittenContent.LastIndexOf(wordToBeDeleted);
-
-            if (lastInstanceOfWordBeingDeleted >= 0)
-            {
-                if(EraserDurability == null)
-                {
-                    paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
-                    IndexOfLastErasedWord = lastInstanceOfWordBeingDeleted;
-                    return paper;
-                }
-
-                var numberOfLettersToBeReplacedByWhitespace = FindLettersToBeErasedByEraserDurability(wordToBeDeleted);
-
-                var indexAdjustment = wordToBeDeleted.Length - numberOfLettersToBeReplacedByWhitespace;
-
-                var lastIndexPositionAdjustedForDurability = lastInstanceOfWordBeingDeleted + indexAdjustment;
-
-                IndexOfLastErasedWord = lastIndexPositionAdjustedForDurability;
-
-                paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted.Substring(indexAdjustment), lastIndexPositionAdjustedForDurability);
-
-            }
+            paper = Eraser.Erase(input, paper);
+            IndexOfLastErasedWord = paper.SpaceWhereErasedWordWas;
             return paper;
         }
 
@@ -157,28 +141,6 @@ namespace PillarPencilKata.Pencil_Logic
         {
             --PencilDurability;
             return letter;
-        }
-
-        private string RemoveSpecifiedWordAndReplaceWithWhiteSpace(string originalSentence, string wordBeingRemoved, int indexPostion)
-        {
-            return originalSentence.Remove(indexPostion, wordBeingRemoved.Length).Insert(indexPostion, new string(' ', wordBeingRemoved.Length));
-        }
-
-        private int FindLettersToBeErasedByEraserDurability(string wordBeingErased)
-        {
-            var counter = 0;
-            foreach (var letter in wordBeingErased.ToCharArray())
-            {
-                if (EraserDurability > 0)
-                {
-                    ++counter;
-                    if (!char.IsWhiteSpace(letter))
-                    {
-                        --EraserDurability;
-                    }
-                }
-            }
-            return counter;
         }
 
         private string FindSubstringBeingReplacedByNewWord(string writtenContent, string wordReplacement)

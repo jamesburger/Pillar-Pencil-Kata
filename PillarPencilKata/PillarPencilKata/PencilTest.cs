@@ -188,7 +188,7 @@ namespace PillarPencilKata
             };
 
             //Act
-            NumberTwoPencil.Eraser(wordToBeDeleted, Paper);
+            NumberTwoPencil.UseEraser(wordToBeDeleted, Paper);
 
             //Assert
             Assert.AreEqual(expectedIndexPosition, NumberTwoPencil.IndexOfLastErasedWord);
@@ -211,7 +211,7 @@ namespace PillarPencilKata
             };
 
             //Act
-            NumberTwoPencil.Eraser(wordToBeDeleted, Paper);
+            NumberTwoPencil.UseEraser(wordToBeDeleted, Paper);
             NumberTwoPencil.ReplaceErasedWord(replacementWord, Paper);
 
             //Assert
@@ -234,7 +234,7 @@ namespace PillarPencilKata
             };
 
             //Act
-            NumberTwoPencil.Eraser(wordToBeDeleted, Paper);
+            NumberTwoPencil.UseEraser(wordToBeDeleted, Paper);
             NumberTwoPencil.ReplaceErasedWord(replacementWord, Paper);
 
             //Assert
@@ -257,7 +257,7 @@ namespace PillarPencilKata
             };
 
             //Act
-            NumberTwoPencil.Eraser(wordToBeDeleted, Paper);
+            NumberTwoPencil.UseEraser(wordToBeDeleted, Paper);
             NumberTwoPencil.ReplaceErasedWord(replacementWord, Paper);
 
             //Assert

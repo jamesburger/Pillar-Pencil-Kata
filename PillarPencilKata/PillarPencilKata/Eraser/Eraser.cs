@@ -1,0 +1,74 @@
+﻿using PillarPencilKata.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace PillarPencilKata.Eraser
+{
+    public class Eraser 
+    {
+
+        public int? EraserDurability { get; set; }
+
+        public Eraser(int? eraserDurability)
+        {
+            EraserDurability = eraserDurability;
+        }
+
+        public PaperModel Erase(string wordToBeDeleted, PaperModel paper)
+        {
+            var lastInstanceOfWordBeingDeleted = paper.WrittenContent.LastIndexOf(wordToBeDeleted);
+
+            if (lastInstanceOfWordBeingDeleted >= 0)
+            {
+                if (EraserDurability == null)
+                {
+                    return EraseWithoutDurability(paper, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
+                }
+
+                var numberOfLettersToBeReplacedByWhitespace = FindLettersToBeErasedByEraserDurability(wordToBeDeleted);
+
+                var indexAdjustment = wordToBeDeleted.Length - numberOfLettersToBeReplacedByWhitespace;
+
+                var lastIndexPositionAdjustedForDurability = lastInstanceOfWordBeingDeleted + indexAdjustment;
+
+                paper.SpaceWhereErasedWordWas = lastIndexPositionAdjustedForDurability;
+
+                paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted.Substring(indexAdjustment), lastIndexPositionAdjustedForDurability);
+
+            }
+            return paper;
+        }
+
+        private PaperModel EraseWithoutDurability(PaperModel paper, string wordToBeDeleted, int lastInstanceOfWordBeingDeleted)
+        {
+            paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
+            paper.SpaceWhereErasedWordWas = lastInstanceOfWordBeingDeleted;
+            return paper;
+        }
+
+        private string RemoveSpecifiedWordAndReplaceWithWhiteSpace(string originalSentence, string wordBeingRemoved, int indexPostion)
+        {
+            return originalSentence.Remove(indexPostion, wordBeingRemoved.Length).Insert(indexPostion, new string(' ', wordBeingRemoved.Length));
+        }
+
+        private int FindLettersToBeErasedByEraserDurability(string wordBeingErased)
+        {
+            var counter = 0;
+            foreach (var letter in wordBeingErased.ToCharArray())
+            {
+                if (EraserDurability > 0)
+                {
+                    ++counter;
+                    if (!char.IsWhiteSpace(letter))
+                    {
+                        --EraserDurability;
+                    }
+                }
+            }
+            return counter;
+        }
+
+    }
+}
