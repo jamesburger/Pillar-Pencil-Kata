@@ -14,22 +14,36 @@ namespace PillarPencilKata.Pencil_Logic
 
         public int IndexOfLastErasedWord { get; private set; }
 
-        public int OriginalSharpness { get; private set; }
+        public int? OriginalSharpness { get; private set; }
 
-        private string NewSentence;
+
+        public Pencil()
+        {
+        }
+
+        public Pencil(int? pencilDurability = null, int? eraserDurability = null, int? pencilLength = null)
+        {
+            PencilDurability = pencilDurability;
+            OriginalSharpness = pencilDurability;
+            EraserDurability = eraserDurability;
+            PencilLength = pencilLength;
+        }
 
         public PaperModel WriteInputOntoPaper(string input, PaperModel Paper)
         {
+
+         var newSentence = "";
+
             if(Paper.WrittenContent == null)
             {
-                Paper.WrittenContent = ReducePencilDurability(input);
+                Paper.WrittenContent = DetermineWhatIsWrittenByPencilDurability(input, newSentence);
             }
             else
             {
-                Paper.WrittenContent += ReducePencilDurability(input);
+                Paper.WrittenContent += DetermineWhatIsWrittenByPencilDurability(input, newSentence);
             }
 
-            NewSentence = string.Empty;
+            newSentence = string.Empty;
 
             return Paper;
         }
@@ -89,61 +103,60 @@ namespace PillarPencilKata.Pencil_Logic
             return paper;
         }
 
-        private string ReducePencilDurability(string input)
+        private string DetermineWhatIsWrittenByPencilDurability(string input, string newSentence)
         {
-            var letterArray = input.ToCharArray();
             if(PencilDurability == null)
             {
-                return NewSentence += input;
+                return newSentence += input;
             }
-            foreach(var letter in letterArray)
+            foreach(var letter in input.ToCharArray())
             {
                 if(PencilDurability > 0)
                 {
-                    ParseLettersByCapitalizationOrWhitespace(letter);
+                   newSentence += ParseLettersByCapitalizationOrWhitespace(letter);
                 }
                 else
                 {
-                    NewSentence += " ";
+                   return newSentence += " ";
                 }
             }
-            return NewSentence;
+            return newSentence;
         }
 
-        private void ParseLettersByCapitalizationOrWhitespace(char letter)
+        private char ParseLettersByCapitalizationOrWhitespace(char letter)
         {
             if (char.IsUpper(letter))
             {
-                UpperCaseLetterHandler(letter);
+               return HandleUpperCaseLetterDurabilityReduction(letter);
             }
             else if (char.IsLower(letter))
             {
-                LowerCaseHandler(letter);
+              return HandleLowerCaseLetterDurabilityReduction(letter);
             }
             else
             {
-                NewSentence += letter;
+               return letter;
             }
         }
 
-        private void UpperCaseLetterHandler(char letter)
+        private char HandleUpperCaseLetterDurabilityReduction(char letter)
         {
             if (PencilDurability == 1)
             {
                 --PencilDurability;
-                NewSentence += char.ToLower(letter);
+               return char.ToLower(letter);
             }
             else
             {
                 PencilDurability = PencilDurability - 2;
-                NewSentence += letter;
+               return letter;
             }
         }
 
-        private void LowerCaseHandler(char letter)
+        private char HandleLowerCaseLetterDurabilityReduction(char letter)
         {
             --PencilDurability;
-            NewSentence += letter;
+            return letter;
         }
 
         private string RemoveSpecifiedWordAndReplaceWithWhiteSpace(string originalSentence, string wordBeingRemoved, int indexPostion)
@@ -183,29 +196,6 @@ namespace PillarPencilKata.Pencil_Logic
             }
             return replacementWordAccountingForOverlap;
         }
-        public Pencil()
-        {
-        }
-
-        public Pencil(int pencilDurability)
-        {
-            PencilDurability = pencilDurability;
-            OriginalSharpness = pencilDurability;
-        }
-
-        public Pencil(int pencilDurability, int eraserDurability)
-        {
-            PencilDurability = pencilDurability;
-            OriginalSharpness = pencilDurability;
-            EraserDurability = eraserDurability;
-        }
-
-        public Pencil(int pencilDurability, int eraserDurability, int pencilLength)
-        {
-            PencilDurability = pencilDurability;
-            OriginalSharpness = pencilDurability;
-            EraserDurability = eraserDurability;
-            PencilLength = pencilLength;
-        }
+       
     }
 }

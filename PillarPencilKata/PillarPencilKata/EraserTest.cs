@@ -140,6 +140,7 @@ namespace PillarPencilKata
             };
             var wordToBeErased = "me";
             var expectedInstancesOfDeletedWord = 0;
+            var expectedEraserDurability = 0;
             
 
             //Act
@@ -147,7 +148,7 @@ namespace PillarPencilKata
 
             //Assert
             Assert.AreEqual(expectedInstancesOfDeletedWord, Regex.Matches(Parchment.WrittenContent, wordToBeErased).Count);
-            Assert.AreEqual(expectedInstancesOfDeletedWord, PeacockQuill.EraserDurability);
+            Assert.AreEqual(expectedEraserDurability, PeacockQuill.EraserDurability);
         }
 
         [Test]
