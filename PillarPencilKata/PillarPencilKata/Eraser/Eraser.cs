@@ -26,17 +26,23 @@ namespace PillarPencilKata.Eraser
                 {
                     return EraseWithoutDurability(paper, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
                 }
-
-                var indexAdjustment = wordToBeDeleted.Length - FindNumberOfLettersToBeErasedByEraserDurability(wordToBeDeleted);
-
-                var lastIndexPositionAdjustedForDurability = lastInstanceOfWordBeingDeleted + indexAdjustment;
-
-                paper.SpaceWhereErasedWordWas = lastIndexPositionAdjustedForDurability;
-
-                paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted.Substring(indexAdjustment), lastIndexPositionAdjustedForDurability);
-
+                paper = EraseWordAccountingForDurability(paper, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
             }
             return paper;
+        }
+
+        private PaperModel EraseWordAccountingForDurability(PaperModel paper, string wordToBeDeleted, int lastInstanceOfWordBeingDeleted)
+        {
+            var indexAdjustment = wordToBeDeleted.Length - FindNumberOfLettersToBeErasedByEraserDurability(wordToBeDeleted);
+
+            var lastIndexPositionAdjustedForDurability = lastInstanceOfWordBeingDeleted + indexAdjustment;
+
+            paper.SpaceWhereErasedWordWas = lastIndexPositionAdjustedForDurability;
+
+            paper.WrittenContent = RemoveSpecifiedWordAndReplaceWithWhiteSpace(paper.WrittenContent, wordToBeDeleted.Substring(indexAdjustment), lastIndexPositionAdjustedForDurability);
+
+            return paper;
+
         }
 
         private PaperModel EraseWithoutDurability(PaperModel paper, string wordToBeDeleted, int lastInstanceOfWordBeingDeleted)
