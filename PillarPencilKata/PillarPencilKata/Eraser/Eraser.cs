@@ -27,9 +27,7 @@ namespace PillarPencilKata.Eraser
                     return EraseWithoutDurability(paper, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
                 }
 
-                var numberOfLettersToBeReplacedByWhitespace = FindLettersToBeErasedByEraserDurability(wordToBeDeleted);
-
-                var indexAdjustment = wordToBeDeleted.Length - numberOfLettersToBeReplacedByWhitespace;
+                var indexAdjustment = wordToBeDeleted.Length - FindNumberOfLettersToBeErasedByEraserDurability(wordToBeDeleted);
 
                 var lastIndexPositionAdjustedForDurability = lastInstanceOfWordBeingDeleted + indexAdjustment;
 
@@ -53,7 +51,7 @@ namespace PillarPencilKata.Eraser
             return originalSentence.Remove(indexPostion, wordBeingRemoved.Length).Insert(indexPostion, new string(' ', wordBeingRemoved.Length));
         }
 
-        private int FindLettersToBeErasedByEraserDurability(string wordBeingErased)
+        private int FindNumberOfLettersToBeErasedByEraserDurability(string wordBeingErased)
         {
             var counter = 0;
             foreach (var letter in wordBeingErased.ToCharArray())
