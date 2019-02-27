@@ -26,12 +26,12 @@ namespace PillarPencilKata.Eraser
                 {
                     return EraseWithoutDurability(paper, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
                 }
-                paper = EraseWordAccountingForDurability(paper, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
+                paper = EraseContentAccountingForDurability(paper, wordToBeDeleted, lastInstanceOfWordBeingDeleted);
             }
             return paper;
         }
 
-        private PaperModel EraseWordAccountingForDurability(PaperModel paper, string wordToBeDeleted, int lastInstanceOfWordBeingDeleted)
+        private PaperModel EraseContentAccountingForDurability(PaperModel paper, string wordToBeDeleted, int lastInstanceOfWordBeingDeleted)
         {
             var indexAdjustment = wordToBeDeleted.Length - FindNumberOfLettersToBeErasedByEraserDurability(wordToBeDeleted);
 
