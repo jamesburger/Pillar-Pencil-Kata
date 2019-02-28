@@ -10,7 +10,7 @@ All required packages are already included in the solution.
 
 # Running the Program
 
-1) Open the Command Window
+1)Open the Command Window
 
 2)Navigate to the solution folder
 
