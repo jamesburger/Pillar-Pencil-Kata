@@ -8,11 +8,17 @@ All required packages are already included in the solution.
 
 # Running the Program
 1) Open the Command Window
+
 2)Navigate to the solution folder
+
 3)There will be a .sln file and a folder with the name of the project, navigate to this folder.
+
 4)Once your CLI is pointed at this location, run the following commands
+
   a) dotnet build (To verify succesful build of solution)
+  
   b) dotnet test (To run all tests in the solution)
+  
   c) dotnet run (To interact with code's funcionality
   
 # Using the Program
