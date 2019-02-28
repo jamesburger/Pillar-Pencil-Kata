@@ -1,7 +1,5 @@
-﻿using PillarPencilKata.Models;
-using PillarPencilKata.Eraser;
-using System;
-using System.Collections.Generic;
+﻿using PillarPencilKata.Eraser_Logic;
+using PillarPencilKata.Models;
 
 namespace PillarPencilKata.Pencil_Logic
 {
@@ -17,19 +15,19 @@ namespace PillarPencilKata.Pencil_Logic
 
         public int? OriginalSharpness { get; private set; }
 
-        public readonly Eraser.Eraser Eraser;
+        public readonly Eraser Eraser;
 
 
         public Pencil()
         {
-            Eraser = new Eraser.Eraser(null);
+            Eraser = new Eraser(null);
         }
 
         public Pencil(int? pencilDurability = null, int? eraserDurability = null, int? pencilLength = null)
         {
             PencilDurability = pencilDurability;
             OriginalSharpness = pencilDurability;
-            Eraser = new Eraser.Eraser(eraserDurability);
+            Eraser = new Eraser(eraserDurability);
             PencilLength = pencilLength;
         }
 

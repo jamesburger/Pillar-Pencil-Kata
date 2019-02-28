@@ -30,7 +30,7 @@ namespace PillarPencilKata
 
         public static Pencil CreatePencil()
         {
-            Console.WriteLine("OK, first you need to create a new pencil. How many durable should it be? (enter a number)");
+            Console.WriteLine("OK, first you need to create a new pencil. How durable should it be? (enter a number)");
             int.TryParse(Console.ReadLine(), out int durability);
             Console.WriteLine("And how long will the eraser last? (enter a number)");
             int.TryParse(Console.ReadLine(), out int eraserDurability);
