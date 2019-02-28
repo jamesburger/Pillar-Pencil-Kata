@@ -3,7 +3,7 @@ using PillarPencilKata.Models;
 
 namespace PillarPencilKata.Pencil_Logic
 {
-    public class Pencil : IPencil
+    public class Pencil 
     {
         public int? PencilDurability { get; set; }
 
