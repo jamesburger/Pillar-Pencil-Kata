@@ -31,3 +31,5 @@ They will then be prompted to enter an initial line of text
 
 A menu will then prompt the user to take further action
 
+The user may continue to take actions until they run completely out of lead, pencil sharpens, or they choose to exit the program
+
