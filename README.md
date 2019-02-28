@@ -30,3 +30,4 @@ Upon succesful compilation the CLI will prompt the user to enter their pencil's 
 They will then be prompted to enter an initial line of text
 
 A menu will then prompt the user to take further action
+
