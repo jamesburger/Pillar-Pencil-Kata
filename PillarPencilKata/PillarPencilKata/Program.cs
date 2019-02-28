@@ -20,7 +20,8 @@ namespace PillarPencilKata
             Pencil pencil = CreatePencil();
             Console.WriteLine("Ok, let's try writing something. Type whatever you'd like below!");
             pencil.WriteInputOntoPaper(Console.ReadLine(), paper);
-            Console.WriteLine("You wrote " + paper.WrittenContent);
+            Console.WriteLine();
+            Console.WriteLine("You wrote -- " + paper.WrittenContent);
             SelectOptions(pencil, paper);
 
 
@@ -41,6 +42,7 @@ namespace PillarPencilKata
 
         public static void SelectOptions(Pencil pencil, PaperModel paper)
         {
+            Console.WriteLine();
             Console.WriteLine("Pick your next action by entering the corresponding number");
             Console.WriteLine("1. Write More");
             Console.WriteLine("2. Erase a Word");
@@ -58,7 +60,9 @@ namespace PillarPencilKata
                     break;
                 case 3:
                     pencil.Sharpen();
+                    Console.WriteLine();
                     Console.WriteLine("Remaining sharpens: " + pencil.PencilLength);
+                    Console.WriteLine();
                     SelectOptions(pencil, paper);
                     break;
                 case 4:
@@ -70,9 +74,11 @@ namespace PillarPencilKata
         public static void WriteMore(Pencil pencil, PaperModel paper)
         {
             Console.WriteLine(paper.WrittenContent);
+            Console.WriteLine();
             Console.WriteLine("Add whatever you'd like to what you've written!");
             pencil.WriteInputOntoPaper(Console.ReadLine(), paper);
             Console.WriteLine(paper.WrittenContent);
+            Console.WriteLine();
             SelectOptions(pencil, paper);
         }
 
@@ -87,12 +93,17 @@ namespace PillarPencilKata
 
         public static void ReplaceErasedWord(Pencil pencil, PaperModel paper)
         {
-            Console.WriteLine("Would you like to replace the word you replaced with another word? 1 for yes, 2 for no");
+            Console.WriteLine();
+            Console.WriteLine("Would you like to replace the word you replaced with another word?");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No");
             int.TryParse(Console.ReadLine(), out int input);
             if(input == 1)
             {
+                Console.WriteLine();
                 Console.WriteLine("Enter the word you'd like to insert: ");
                 pencil.ReplaceErasedWord(Console.ReadLine(), paper);
+                Console.WriteLine();
                 Console.WriteLine(paper.WrittenContent);
                 SelectOptions(pencil, paper);
             }
